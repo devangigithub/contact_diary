@@ -1,15 +1,31 @@
+// import 'dart:io';
+//
+// import 'package:flutter/foundation.dart';
+// import 'package:flutter/material.dart';
+//
+// class HomeProvider extends ChangeNotifier{
+//
+//   bool isAndroid = Platform.kIsWeb;
+//
+//   void change(){
+//
+//     isAndroid=!isAndroid;
+//
+//     notifyListeners();
+//
+//   }
+//
+// }
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class HomeProvider extends ChangeNotifier{
+class HomeProvider extends ChangeNotifier {
 
-  bool isAndroid =false;
+  bool isAndroid = !kIsWeb;
 
-  void change(){
-
-    isAndroid=!isAndroid;
-
+  void change() {
+    isAndroid = !isAndroid;
     notifyListeners();
-
   }
-
 }
