@@ -22,7 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3),(){
-      // Navigator.of(context).pushReplacementNamed('home');
       navigateToNextScreen();
     });
   }
@@ -30,12 +29,28 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.network(''),
-          Text('Contact Diary',)
-        ],
+      body: Container(
+        alignment: Alignment.center,
+
+        height: 700,
+        width: double.infinity,
+        child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 300,
+              width: 250,
+              alignment: Alignment.center,
+                child: Image.network('https://cdn-icons-png.flaticon.com/256/3238/3238016.png',height: 180,width: 140,)),
+            SizedBox(height: 20,),
+            Text('Contact  Diary',style: TextStyle(
+              fontSize: 40,
+              letterSpacing: 4,
+              wordSpacing: 5,
+              fontWeight: FontWeight.w500,
+            ),)
+          ],
+        ),
       ),
     );
   }

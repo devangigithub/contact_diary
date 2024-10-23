@@ -44,6 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.all(10),
               child: TextFormField(
                 controller: nameController,
+                textCapitalization: TextCapitalization.words,
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   hintText: 'Enter your name',
                   label: Text('Name'),

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../model/contact.dart';
+import '../model/add_contact.dart';
 
 class ContactProvider extends ChangeNotifier {
   List<Contact> contactList = [];

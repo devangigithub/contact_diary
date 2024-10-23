@@ -5,6 +5,7 @@ class Contact {
   String? img;
   String? email;
   String? address;
+  String? imagePath;
 
   Contact({
     this.name,
@@ -13,5 +14,6 @@ class Contact {
     this.img,
     this.email,
     this.address,
+    this.imagePath,
   });
 }
