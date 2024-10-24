@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:pr_one_contct/provider/home_provider.dart';
 import 'package:pr_one_contct/provider/main_provider.dart';
 import 'package:provider/provider.dart';
@@ -35,8 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
             fontSize: 30,
             color: Colors.blue
           ),),
-          actions: [
 
+          actions: [
             const SizedBox(height: 20),
             Text(
               username ?? "Guest",
@@ -87,17 +88,35 @@ class _HomeScreenState extends State<HomeScreen> {
             SettingsPage(),
           ],
         ),
+
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
           child: Icon(Icons.add),
-          onPressed: () => Navigator.pushNamed(context, 'add_contact'),
+          onPressed: () async {
+            LocalAuthentication authentication = LocalAuthentication();
+
+            if (await authentication.isDeviceSupported()) {
+              print("isDeviceSupported");
+
+              bool isAuth = await authentication.authenticate(
+                  localizedReason: "Please authenticate to add Contact"
+              );
+
+              if (isAuth) {
+                Navigator.pushNamed(context, 'add_contact');
+              }
+              print("isAuth $isAuth");
+            } else {
+              print("isDeviceSupported false");
+            }
+          },
         ),
+
       );
     } else {
       return CupertinoPageScaffold(
         navigationBar: CupertinoNavigationBar(
-          // middle: const Text('Contact'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -162,17 +181,32 @@ class _HomeScreenState extends State<HomeScreen> {
               bottom: 80,
               right: 16,
               child: CupertinoButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    CupertinoPageRoute(
-                      builder: (context) => AddContact(),
-                    ),
-                  );
+                onPressed: () async {
+                  LocalAuthentication authentication = LocalAuthentication();
+                  if (await authentication.isDeviceSupported()) {
+                    print("isDeviceSupported");
+
+                    bool isAuth = await authentication.authenticate(
+                        localizedReason: "Please authenticate to add Contact"
+                    );
+
+                    if (isAuth) {
+                      Navigator.of(context).push(
+                        CupertinoPageRoute(
+                          builder: (context) => AddContact(),
+                        ),
+                      );
+                    }
+                    print("isAuth $isAuth");
+                  } else {
+                    print("isDeviceSupported false");
+                  }
                 },
                 color: CupertinoColors.activeBlue,
                 child: const Icon(CupertinoIcons.add),
               ),
             ),
+
           ],
         ),
       );

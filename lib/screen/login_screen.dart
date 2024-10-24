@@ -54,10 +54,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 2.0), // Color when focused
+                      borderSide: BorderSide(color: Colors.blue, width: 2.0),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey, width: 1.0), // Color when not focused
+                      borderSide: BorderSide(color: Colors.grey, width: 1.0),
                     ),
                   ),
                 ),

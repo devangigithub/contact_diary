@@ -8,7 +8,7 @@ class HomeProvider extends ChangeNotifier {
 
   bool isAndroid = Platform.isAndroid;
 
-  void change() {
+  void change()  {
     isAndroid = !isAndroid;
     notifyListeners();
   }

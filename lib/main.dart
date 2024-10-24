@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pr_one_contct/provider/contct_provider.dart';
@@ -13,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
 late SharedPreferences preferences;
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +29,9 @@ void main() async {
            builder: (context, child) {
            var isAndroid = Provider.of<HomeProvider>(context).isAndroid;
 
-           return isAndroid
+            return isAndroid
             ? MaterialApp(
+
             initialRoute: '/',
             debugShowCheckedModeBanner: false,
             routes: {

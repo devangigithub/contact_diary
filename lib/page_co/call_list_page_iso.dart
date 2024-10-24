@@ -1,14 +1,13 @@
-import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pr_one_contct/provider/contct_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../model/add_contact.dart';
-import '../provider/contct_provider.dart';
+
 
 class CallListPageIso extends StatefulWidget {
   const CallListPageIso({super.key});
@@ -18,66 +17,89 @@ class CallListPageIso extends StatefulWidget {
 }
 
 class _CallListPageIsoState extends State<CallListPageIso> {
-
   TextEditingController searchController = TextEditingController();
   String searchQuery = '';
+
   @override
   Widget build(BuildContext context) {
-
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: const Text("Contacts"),
       ),
-      child: Consumer<ContactProvider>(
-        builder: (BuildContext context, ContactProvider value, Widget? child) {
-          if (value.contactList.isEmpty) {
-            return const Center(
-              child: Text(
-                "No Contact",
-                style: TextStyle(fontSize: 50),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CupertinoSearchTextField(
+                controller: searchController,
+                onChanged: (query) {
+                  setState(() {
+                    searchQuery = query;
+                  });
+                },
               ),
-            );
-          }
-
-          return CupertinoScrollbar(
-            child: ListView.builder(
-              itemCount: value.contactList.length,
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                Contact contact = value.contactList[index];
-                return CupertinoListTile(
-                  title: Text(
-                    contact.name ?? "",
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Text(
-                    contact.number ?? "",
-                    style: const TextStyle(color: CupertinoColors.inactiveGray),
-                  ),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () => launchUrl(Uri.parse("tel:${contact.number}")),
-                        child: const Icon(CupertinoIcons.phone),
-                      ),
-                      CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        child: const Icon(CupertinoIcons.ellipsis),
-                        onPressed: () => _showActionSheet(context, contact, value, index),
-                      ),
-                    ],
-                  ),
-                );
-              },
             ),
-          );
-        },
+            Expanded(
+              child: Consumer<ContactProvider>(
+                builder: (BuildContext context, ContactProvider value, Widget? child) {
+                  if (value.contactList.isEmpty) {
+                    return const Center(
+                      child: Text(
+                        "No Contact",
+                        style: TextStyle(fontSize: 50),
+                      ),
+                    );
+                  }
+                  final filteredContacts = value.contactList.where((contact) {
+                    final phoneNumber = contact.name?.toLowerCase() ?? '';
+                    return phoneNumber.contains(searchQuery.toLowerCase())||
+                        contact.number!.contains(searchQuery);
+                  }).toList();
+
+                  return CupertinoScrollbar(
+                    child: ListView.builder(
+                      itemCount: filteredContacts.length,
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        Contact contact = filteredContacts[index];
+                        return CupertinoListTile(
+                          title: Text(
+                            contact.name ?? "",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            contact.number ?? "",
+                            style: const TextStyle(color: CupertinoColors.inactiveGray),
+                          ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CupertinoButton(
+                                padding: EdgeInsets.zero,
+                                onPressed: () => launchUrl(Uri.parse("tel:${contact.number}")),
+                                child: const Icon(CupertinoIcons.phone),
+                              ),
+                              CupertinoButton(
+                                padding: EdgeInsets.zero,
+                                child: const Icon(CupertinoIcons.ellipsis),
+                                onPressed: () => _showActionSheet(context, contact, value, index),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -129,4 +151,3 @@ class _CallListPageIsoState extends State<CallListPageIso> {
     );
   }
 }
-

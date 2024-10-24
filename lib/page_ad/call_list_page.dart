@@ -47,7 +47,8 @@ class _CallListPageState extends State<CallListPage> {
           child: Consumer<ContactProvider>(
             builder: (BuildContext context, ContactProvider value, Widget? child) {
               List<Contact> filteredContacts = value.contactList.where((contact) {
-                return contact.name!.toLowerCase().contains(searchQuery);
+                return contact.name!.toLowerCase().contains(searchQuery)||
+                    contact.number!.contains(searchQuery);
               }).toList();
 
               if (filteredContacts.isEmpty) {

@@ -45,9 +45,6 @@ class _AddContactState extends State<AddContact> {
   }
   @override
   Widget build(BuildContext context) {
-    int r = Random().nextInt(255);
-    int g = Random().nextInt(255);
-    int b = Random().nextInt(255);
 
     editIndex = ModalRoute.of(context)?.settings.arguments as int?;
     if (editIndex != null) {
@@ -74,7 +71,6 @@ class _AddContactState extends State<AddContact> {
                     SizedBox(height: 50,),
                     Container(
                       height: 250,
-                      // color: Color.fromARGB(255, r, g, b),
                       child: SingleChildScrollView(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -131,125 +127,134 @@ class _AddContactState extends State<AddContact> {
                                 ],
                               ),
                             ),
-                        
+
                           ],
                         ),
                       ),
                     ),
-                    SizedBox(height: 50,),
-                    TextFormField(
-                      controller: nameController,
-                      style: TextStyle(fontSize: 18),
-                      textCapitalization: TextCapitalization.words,
-                      keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Name",
-                        icon: Icon(Icons.person,color: Colors.blue,),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 39),
-                      child: TextFormField(
-                        controller: surnameController,
-                        style: TextStyle(fontSize: 18),
-                        textCapitalization: TextCapitalization.words,
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: "Surname",
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: numberController,
-                      style: TextStyle(fontSize: 18),
-                      textCapitalization: TextCapitalization.none,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Number",
-                        icon: Icon(Icons.phone,color: Colors.blue,),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: emailController,
-                      style: TextStyle(fontSize: 18),
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Email",
-                        icon: Icon(Icons.mail,color: Colors.blue,),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: addressController,
-                      style: TextStyle(fontSize: 18),
-                      textCapitalization: TextCapitalization.words,
-                      keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Address",
-                        icon: Icon(Icons.home,color: Colors.blue,),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                      controller: dobController,
-                      style: TextStyle(fontSize: 18),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Select DOB",
-                        icon: Icon(Icons.cake,color: Colors.blue,),
-                      ),
-                      readOnly: true,
-                      onTap: () async {
-                        DateTime? selectDate = await showDatePicker(
-                          context: context,
-                          firstDate: DateTime(2005),
-                          currentDate: DateTime.now(),
-                          lastDate: DateTime(2050),
-                        );
-                        if (selectDate != null) {
-                          dobController.text = "${selectDate.day}-${selectDate.month}-${selectDate.year}";
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 39
-                      ),
-                      child: TextFormField(
-                        controller: timeController,
-                        style: TextStyle(fontSize: 18),
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: "Select Time",
-                        ),
-                        readOnly: true,
-                        onTap: () async {
-                          TimeOfDay? time = await showTimePicker(
-                            context: context,
-                            initialTime: TimeOfDay.now(),
-                            builder: (context, child) {
 
-                              return MediaQuery(
-                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true), // Force 24-hour format
-                                child: child!,
+                    Form(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 50,),
+                          TextFormField(
+                            controller: nameController,
+                            style: TextStyle(fontSize: 18),
+                            textCapitalization: TextCapitalization.words,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Name",
+                              icon: Icon(Icons.person,color: Colors.blue,),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 39),
+                            child: TextFormField(
+                              controller: surnameController,
+                              style: TextStyle(fontSize: 18),
+                              textCapitalization: TextCapitalization.words,
+                              keyboardType: TextInputType.text,
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: "Surname",
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: numberController,
+                            style: TextStyle(fontSize: 18),
+                            textCapitalization: TextCapitalization.none,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Number",
+                              icon: Icon(Icons.phone,color: Colors.blue,),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: emailController,
+                            style: TextStyle(fontSize: 18),
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Email",
+                              icon: Icon(Icons.mail,color: Colors.blue,),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: addressController,
+                            style: TextStyle(fontSize: 18),
+                            textCapitalization: TextCapitalization.words,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Address",
+                              icon: Icon(Icons.home,color: Colors.blue,),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: dobController,
+                            style: TextStyle(fontSize: 18),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "Select DOB",
+                              icon: Icon(Icons.cake,color: Colors.blue,),
+                            ),
+                            readOnly: true,
+                            onTap: () async {
+                              DateTime? selectDate = await showDatePicker(
+                                context: context,
+                                firstDate: DateTime(2005),
+                                currentDate: DateTime.now(),
+                                lastDate: DateTime(2050),
                               );
+                              if (selectDate != null) {
+                                dobController.text = "${selectDate.day}-${selectDate.month}-${selectDate.year}";
+                              }
                             },
-                          );
-                          if (time != null) {
-                            timeController.text = "${time.hour}:${time.minute}";
-                          }
-                        },
+                          ),
+                          const SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 39
+                            ),
+                            child: TextFormField(
+                              controller: timeController,
+                              style: TextStyle(fontSize: 18),
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: "Select Time",
+                              ),
+                              readOnly: true,
+                              onTap: () async {
+                                TimeOfDay? time = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                  builder: (context, child) {
+
+                                    return MediaQuery(
+                                      data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true), // Force 24-hour format
+                                      child: child!,
+                                    );
+                                  },
+                                );
+                                if (time != null) {
+                                  timeController.text = "${time.hour}:${time.minute}";
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+
+
                     const SizedBox(height: 50),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -449,7 +454,7 @@ class _AddContactState extends State<AddContact> {
                               context: context,
                               builder: (BuildContext context) {
                                 return Container(
-                                  height: 250,
+                                  height: 300,
                                   color: CupertinoColors.systemBackground,
                                   child: Column(
                                     children: [
@@ -488,7 +493,7 @@ class _AddContactState extends State<AddContact> {
                           style: TextStyle(fontSize: 18),
                           placeholderStyle: TextStyle(fontSize: 18, color: CupertinoColors.systemGrey),
                           padding: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
-                          readOnly: true, // Prevent manual input
+                          readOnly: true,
                           prefix: CupertinoButton(
                             padding: EdgeInsets.zero,
                             onPressed: () {
@@ -496,14 +501,14 @@ class _AddContactState extends State<AddContact> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: 250,
+                                    height: 300,
                                     color: CupertinoColors.systemBackground,
                                     child: Column(
                                       children: [
                                         SizedBox(
                                           height: 200,
                                           child: CupertinoTimerPicker(
-                                            mode: CupertinoTimerPickerMode.hm, // Hours and minutes
+                                            mode: CupertinoTimerPickerMode.hm,
                                             onTimerDurationChanged: (Duration newTimer) {
                                               setState(() {
                                                 String formattedTime = "${newTimer.inHours.toString().padLeft(2, '0')}:${(newTimer.inMinutes % 60).toString().padLeft(2, '0')}";
@@ -515,7 +520,7 @@ class _AddContactState extends State<AddContact> {
                                         CupertinoButton(
                                           child: Text("Done"),
                                           onPressed: () {
-                                            Navigator.pop(context); // Close the modal
+                                            Navigator.pop(context);
                                           },
                                         ),
                                       ],
@@ -524,7 +529,7 @@ class _AddContactState extends State<AddContact> {
                                 },
                               );
                             },
-                            child: Icon(CupertinoIcons.clock), // Using a clock icon to represent time selection
+                            child: Icon(CupertinoIcons.clock),
                           ),
                         ),
 
