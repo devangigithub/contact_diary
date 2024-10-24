@@ -54,6 +54,12 @@
 ![Screenshot_20241023_215400](https://github.com/user-attachments/assets/fb0001a3-92a5-42c2-823e-ad116bfc3637)
 ![Screenshot_20241023_215409](https://github.com/user-attachments/assets/e19cf69d-5596-4cea-ba15-35506099feae)
 
+# Contact List Page #
+![Screenshot_20241024_222507](https://github.com/user-attachments/assets/14707993-8c53-471b-9b14-bc140943cc43)
+![Screenshot_20241024_222515](https://github.com/user-attachments/assets/453c73f7-04cb-44d8-bac4-ea81c084d511)
+![Screenshot_20241024_222526](https://github.com/user-attachments/assets/6f6bc43f-c03b-4c8a-8509-e9abe0b584b2)
+
+
 # Edit Share Mail and Delete #
 ![Screenshot_20241024_212624](https://github.com/user-attachments/assets/4c80d750-3eff-4a4f-b15c-dff6f2a8becb)
 ![Screenshot_20241023_215616](https://github.com/user-attachments/assets/cb4121f9-7d34-49d1-9cce-4d64844e0607)
